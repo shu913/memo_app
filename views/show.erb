@@ -1,0 +1,16 @@
+<h1>詳細画面</h1>
+
+<h2>タイトル</h2>
+<%= @title %>
+
+<h2>内容</h2>
+<%= @content %>
+
+<p><a href="/memos">メモ一覧へ</a></p>
+
+<a href="/edit/<%= params[:id] %>"><input type="submit" value="編集"></a>
+
+<form method="post" action="/memos/<%= params['id'] %>">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="削除">
+</form>

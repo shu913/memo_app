@@ -1,0 +1,13 @@
+<h1>編集画面</h1>
+
+<form action="/memos/<%= @id %>/edit" method="post">
+  <input type="hidden" name="_method" value="PATCH">
+
+  <label for="title">タイトル</label>
+  <input type="text" name="title" value="<%= @title %>" maxlength=20 required>
+
+  <label for="content">内容</label>
+  <textarea type="text" name="content" maxlength=200 required><%= @content %></textarea>
+
+  <input type="submit" value="保存">
+</form>
