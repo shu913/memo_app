@@ -8,7 +8,7 @@
 
 <p><a href="/memos">メモ一覧へ</a></p>
 
-<a href="/edit/<%= params[:id] %>"><input type="submit" value="編集"></a>
+<a href="/memos/<%= params[:id] %>/edit"><input type="submit" value="編集"></a>
 
 <form method="post" action="/memos/<%= params['id'] %>">
   <input type="hidden" name="_method" value="DELETE">

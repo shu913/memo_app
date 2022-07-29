@@ -10,7 +10,7 @@ helpers do
   end
 end
 
-get '/new' do
+get '/memos/new' do
   erb :new
 end
 
@@ -37,7 +37,7 @@ get '/memos/:id' do
   erb :show
 end
 
-get '/edit/:id' do
+get '/memos/:id/edit' do
   memo = File.open("./data/memos_#{params[:id]}.json") { |file| JSON.parse(file.read) }
   @id = memo['id']
   @title = h(memo['title'])
@@ -45,7 +45,7 @@ get '/edit/:id' do
   erb :edit
 end
 
-patch '/memos/:id/edit' do
+patch '/memos/:id' do
   File.open("./data/memos_#{params['id']}.json", 'w') do |file|
     memo = { 'id' => params[:id], 'title' => params[:title], 'content' => params[:content], 'time' => Time.now }
     JSON.dump(memo, file)
