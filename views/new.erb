@@ -1,0 +1,18 @@
+<div class="container">
+  <h1>新規作成</h1>
+
+  <form action="/memos" method="post">
+    <div class="text_field">
+      <label for="title">タイトル</label>
+      <input type="text" name="title" maxlength=20 required>
+    </div>
+
+    <div class="text_field2">
+      <label for="content">内容</label>
+      <br>
+      <textarea type="text" name="content" rows="5" cols="35" maxlength="100" minlength="1" required></textarea>
+    </div>
+
+    <input type="submit" value="保存">
+  </form>
+</div>
