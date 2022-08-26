@@ -11,11 +11,6 @@ helpers do
 end
 
 conn = PG::Connection.new(host: 'localhost', port: '5432', dbname: 'memo_app')
-conn.exec('CREATE TABLE IF NOT EXISTS memos (
-  id serial primary key,
-  title varchar(20),
-  content varchar(200),
-  timestamp timestamp)')
 
 get '/memos/new' do
   erb :new
@@ -24,9 +19,23 @@ end
 post '/memos' do
   title = params[:title]
   content = params[:content]
+
+  max_length_title = 20
+  if title.length > max_length_title
+    redirect '/error'
+    return
+  end
+
+  max_length_content = 200
+  if content.length > max_length_content
+    redirect '/error'
+    return
+  end
+
   memos =
     conn.exec('INSERT INTO memos (title, content, timestamp)
                  VALUES ($1, $2, current_timestamp) RETURNING id', [title, content])
+
   redirect "/memos/#{memos[0]['id']}"
 end
 
@@ -63,4 +72,8 @@ patch '/memos/:id' do |id|
   content = params[:content]
   conn.exec('UPDATE memos SET title = $1, content = $2 WHERE id = $3', [title, content, id])
   redirect "/memos/#{id}"
+end
+
+get '/error' do
+  erb :error
 end
